@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Task</title>
+</head>
+<body>
+    <h1>Todo Task</h1>
+    <form action="/add" method="POST">
+        <input type="text" name="task" placeholder="Enter task" required>
+        <button type="submit">Add</button>
+    </form>
+    <ul>
+        <% todos.forEach((item) => { %>
+            <li>
+                <form action="/edit/<%= item._id %>" method="POST" style="display:inline;">
+                    <input type="text" name="task" value="<%= item.task %>">
+                    <input type="radio" name="status" value="DONE" <%= item.status === "DONE" ? "checked" : "" %>> DONE
+                    <input type="radio" name="status" value="Not Done" <%= item.status === "Not Done" ? "checked" : "" %>> Not DONE
+                    <button type="submit">Edit</button>
+                </form>
+                <form action="/delete/<%= item._id %>" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+                <br><br>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>
